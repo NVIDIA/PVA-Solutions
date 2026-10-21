@@ -1,0 +1,84 @@
+/*
+ * SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/*
+ * The R5 launch fill covers the first 16 KiB. Keep Part 1 control and callees
+ * before the tiny _main dispatcher. The Part 2 VPU request covers the separate
+ * Part 2 control and compute stage through the program exit.
+ *
+ * This is a CMake template. The block-Cholesky kernels take VMEM-bank-qualified
+ * pointers, and the bank qualifier is part of their mangled names. Its spelling
+ * depends on the Chess frontend, so CMake substitutes the CAPON_ROI_MANGLED_RAM_*
+ * placeholders with the form the selected PVA SDK produces.
+ */
+#define CUPVA_NOMAP_MAIN
+#include <cupva_vpu.bcf>
+
+/* Part 1 control is at the front of the launch-resident Part 1 block. */
+_symbol capon_roi_part1_phase _next
+
+/* Part 1 initialization and kernels, in first-use order. */
+_symbol init_capon_roi_part1_config _next
+_symbol compute_covariance_matrix_knl_nhw_init _next
+_symbol update_snapshot_agen_addr _next
+_symbol cov_mat_diag_s32_nhw _next
+_symbol cov_mat_off_diag_s32_nhw _next
+_symbol add_diagonal_loading_knl_fp_impl _next
+_symbol _Z34block_cholesky_opt_full_driver_bs4P27Para_capon_roi_part1_config _next
+_symbol _Z23diag_block_cholesky_bs4P27Para_capon_roi_part1_configP@CAPON_ROI_MANGLED_RAM_Ab@7dvfloatP@CAPON_ROI_MANGLED_RAM_Cb@S1_S3_P@CAPON_ROI_MANGLED_RAM_Bb@S1_S3_S5_S3_S7_i _next
+_symbol _Z19diag_block_linv_bs4P27Para_capon_roi_part1_configP@CAPON_ROI_MANGLED_RAM_Ab@7dvfloatP@CAPON_ROI_MANGLED_RAM_Cb@S1_S3_P@CAPON_ROI_MANGLED_RAM_Bb@S1_S3_S5_S3_S7_i _next
+_symbol _Z12off_diag_bs4P27Para_capon_roi_part1_configP@CAPON_ROI_MANGLED_RAM_Ab@7dvfloatP@CAPON_ROI_MANGLED_RAM_Cb@S1_S3_P@CAPON_ROI_MANGLED_RAM_Bb@S1_S3_S5_S3_S7_ii _next
+_symbol _Z20schur_update_col_bs4P27Para_capon_roi_part1_configP@CAPON_ROI_MANGLED_RAM_Ab@7dvfloatP@CAPON_ROI_MANGLED_RAM_Cb@S1_S3_S5_iii _next
+_symbol _Z23schur_update_col_last_2P27Para_capon_roi_part1_configP@CAPON_ROI_MANGLED_RAM_Ab@7dvfloatP@CAPON_ROI_MANGLED_RAM_Cb@S1_S3_S5_ii _next
+_symbol _Z24linv_opt_full_driver_bs4P27Para_capon_roi_part1_config _next
+_symbol _Z15update_diag_bs4P27Para_capon_roi_part1_configP@CAPON_ROI_MANGLED_RAM_Ab@7dvfloatP@CAPON_ROI_MANGLED_RAM_Cb@S1_S3_P@CAPON_ROI_MANGLED_RAM_Bb@S1_S3_S5_S3_S7_ii _next
+_symbol _Z17compute_block_bs4P27Para_capon_roi_part1_configP@CAPON_ROI_MANGLED_RAM_Ab@7dvfloatP@CAPON_ROI_MANGLED_RAM_Bb@S1_S3_S5_ii _next
+_symbol _Z18update_offdiag_bs4P27Para_capon_roi_part1_configP@CAPON_ROI_MANGLED_RAM_Ab@7dvfloatP@CAPON_ROI_MANGLED_RAM_Cb@S1_S3_P@CAPON_ROI_MANGLED_RAM_Bb@S1_S3_S5_S3_S7_iii _next
+_symbol _Z19cupvaICachePrefetchjj _next
+_symbol _main _next
+
+/* Fixed map-derived window: Part 2 control, initialization, kernels, and exit. */
+_symbol capon_roi_part2_phase _next
+_symbol _Z27init_capon_roi_part2_configRK20PVADoaCaponROIParamsPfPiS2_S2_PtS2_PvS5_S4_S4_S4_S4_R27Para_capon_roi_part2_config _next
+_symbol _Z26init_obtain_fixed_pt_L_invPfPiR27Para_capon_roi_part2_config _next
+_symbol _Z35init_shift_fixed_pt_steering_matrixtR27Para_capon_roi_part2_config _next
+_symbol _Z40init_compute_L_inv_times_steering_matrixR27Para_capon_roi_part2_config _next
+_symbol _Z28init_compute_fp_rcp_spectrumR27Para_capon_roi_part2_config _next
+_symbol _Z20init_obtain_spectrumPfS_PtS_R27Para_capon_roi_part2_config _next
+_symbol _Z25init_estimate_noise_floorPKtPvS1_PtR27Para_capon_roi_part2_config _next
+_symbol _Z54init_extract_3x3filtered_spectrum_in16az8el_out14az6elPKtPtS1_R27Para_capon_roi_part2_config _next
+_symbol _Z25init_mark_peak_candidatesPKtPtR27Para_capon_roi_part2_config _next
+_symbol _Z19init_get_top3_peaksfPKtR27Para_capon_roi_part2_config _next
+
+/* Part 2 kernels complete the prefetched window. */
+_symbol _Z28obtain_fixed_pt_L_inv_stage0PKfS0_RK27Para_capon_roi_part2_config _next
+_symbol _Z28obtain_fixed_pt_L_inv_stage1RK27Para_capon_roi_part2_config _next
+_symbol _Z25update_part2_sv_agen_baseR27Para_capon_roi_part2_configPiS1_i _next
+_symbol _Z30shift_fixed_pt_steering_matrixRK27Para_capon_roi_part2_config _next
+_symbol _Z54compute_L_inv_times_steering_matrix_triangular_mat_mulRK27Para_capon_roi_part2_configb _next
+_symbol _Z55compute_L_inv_times_steering_matrix_rectangular_mat_mulRK27Para_capon_roi_part2_config _next
+_symbol _Z23compute_fp_rcp_spectrumRK27Para_capon_roi_part2_config _next
+_symbol _Z22obtain_spectrum_stage0RK27Para_capon_roi_part2_config _next
+_symbol _Z22obtain_spectrum_stage1RK27Para_capon_roi_part2_config _next
+_symbol _Z20estimate_noise_floorRK27Para_capon_roi_part2_config _next
+_symbol _Z56extract_3x3filtered_spectrum_in16az8el_out14az6el_stage0RK27Para_capon_roi_part2_config _next
+_symbol _Z56extract_3x3filtered_spectrum_in16az8el_out14az6el_stage1RK27Para_capon_roi_part2_config _next
+_symbol _Z20mark_peak_candidatesRK27Para_capon_roi_part2_config _next
+_symbol _Z14get_top3_peaksRK27Para_capon_roi_part2_config _next
+
+_symbol _main_exit_trampoline _next
+_symbol _main_exit _next

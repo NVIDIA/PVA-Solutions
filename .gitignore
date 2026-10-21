@@ -1,0 +1,48 @@
+#
+# SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+# Prebuilt artifacts fetched at configure time by cmake/pva_fetch_prebuilt.cmake.
+# These are downloaded into the source tree and must never be
+# committed (the public release repo ships source only; binaries live on
+# server keyed per release tag).
+.pva_prebuilt_cache/
+.pva_fetched_*
+**/.pva_fetched_*
+
+# Fetched device (VPU) binaries and pva_dl_lib static libs.
+src/operator/device_binaries/
+src/operator/deep_learning/pva-dl-lib/lib/
+src/operator/deep_learning/pva-dl-lib/include/pva_lib_defs.h
+
+# Fetched host tool (onnx compiler).
+tools/pva-onnx-compiler
+
+# Fetched sample/pipeline data assets.
+pipelines/assets/radar/4t4r/radar_raw_4t4r_1.bin
+pipelines/assets/radar/8t8r/radar_raw_8t8r_1.bin
+samples/assets/canny_edge_detector/kodim08.bin
+samples/assets/canny_edge_detector/kodim08.png
+samples/assets/capon_roi/16x16_ura/inputs.bin
+samples/assets/coherent_integration/input_rdm_s32.bin
+samples/assets/cornersubpix/input_corners_kodim08.bin
+samples/assets/cornersubpix/kodim08.bin
+samples/assets/cornersubpix/kodim08.png
+samples/assets/onnx/daisy.bin
+samples/assets/onnx/traffic.bin
+samples/assets/onnx/traffic.jpg
+samples/assets/onnx/traffic.png
+tools/pva-onnx-compiler

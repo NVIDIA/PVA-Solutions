@@ -1,0 +1,34 @@
+{
+    "ddmDopplerOffsets": [
+        -0.21875,
+        -0.15625,
+        -0.09375,
+        -0.03125,
+        0.03125,
+        0.09375,
+        0.15625,
+        0.21875,
+        0.28125,
+        0.34375,
+        0.40625,
+        0.46875,
+        0.53125,
+        0.59375,
+        0.65625,
+        0.71875
+    ],
+    "carrierFrequency": 77000000000.0,
+    "numTransmitAntennas": 8,
+    "numAzimuthReceiveAntennas": 2,
+    "numElevationReceiveAntennas": 4,
+    "numSamples": 1024,
+    "numChirps": 512,
+    "ddmRepeatFoldFactor": 16,
+    "rangeResolution": 0.5,
+    "sweepTime": 0.000003415696334829077,
+    "mountingAngle": [
+        0.0,
+        -5.0,
+        0.0
+    ]
+}

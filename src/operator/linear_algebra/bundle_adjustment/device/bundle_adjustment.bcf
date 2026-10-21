@@ -1,0 +1,80 @@
+
+/* SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved. */
+/* SPDX-License-Identifier: Apache-2.0 */
+
+/* Licensed under the Apache License, Version 2.0 (the "License"); */
+/* you may not use this file except in compliance with the License. */
+/* You may obtain a copy of the License at */
+/* */
+/* http://www.apache.org/licenses/LICENSE-2.0 */
+/* */
+/* Unless required by applicable law or agreed to in writing, software */
+/* distributed under the License is distributed on an "AS IS" BASIS, */
+/* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. */
+/* See the License for the specific language governing permissions and */
+/* limitations under the License. */
+
+/* I-cache layout: .text exceeds the I-cache, so pack each phase contiguously and keep one-shot */
+/* code out of the hot per-tile path. kIcachePrefetch*Bytes in bundle_adjustment_param.h depend on it. */
+
+#include <cupva_vpu.bcf>
+
+/* One-shot setup, placed before the hot groups so it does not fragment them. */
+_symbol _Z9ParamInitP16ParamBundlerType _next
+_symbol _Z17AgenConfigInitKnlP16ParamBundlerType _next
+
+/* Per-tile hot path: BuildReducedSystem's loop, Stage0/Stage1 and every kernel they call. */
+_symbol _Z18BuildReducedSystemi _next
+/* Per-tile DMA helpers belong inside the hot group (default layout places them past it). */
+_symbol _Z20issueStage0TileLoadsiii _next
+_symbol _Z17issuePoints3dTileiiPf _next
+_symbol _Z16ResetVariableKnliP16ParamBundlerType _next
+_symbol _Z24BuildReducedSystemStage0i _next
+_symbol _Z18FindValidTracksKnlPK6dvuintS1_S1_ii _next
+_symbol _Z16ComputeWeightKnlPK6dvuintfPS_i _next
+_symbol _Z14ScaleWeightKnlPK6dvuintfS1_i _next
+_symbol _Z23ComputeJacobianPointKnliPK6dvuintS1_S1_i _next
+_symbol _Z17FilterJacobianKnlPK6dvuintS1_S1_i _next
+_symbol _Z19ScalePoseDiagnalKnlPK6dvuintfi _next
+_symbol _Z24ComputeJacobianPoseS1KnlPK6dvuintS1_S1_i _next
+_symbol _Z24ComputeJacobianPoseS2KnlPK6dvuintS1_S1_i _next
+_symbol _Z15ComputeIndexKnliii _next
+_symbol _Z12ReductionKnlPK6dvuintS1_fii _next
+_symbol _Z8CopyAKnlPK6dvuintS1_ii _next
+_symbol _Z24BuildReducedSystemStage1i _next
+_symbol _Z22InverseSymmetric3X3KnlPK6dvuintS1_S1_i _next
+
+/* Shared matrix helpers (both stages and ApplyUpdate). */
+_symbol _Z19TransformCam2rigKnlPfS_S_ii _next
+_symbol _Z18UpdateWithDeltaKnlPK6dvuintS1_S1_fii _next
+_symbol _Z12MatrixMulKnlPK6dvuintS1_S1_iiiii _next
+_symbol _Z14MatrixMulV2KnlPK6dvuintS1_S1_iiiii _next
+_symbol _Z16MatrixMulKnl_332PK6dvuintS1_S1_iiiii _next
+_symbol _Z16MatrixMulKnl_323PK6dvuintS1_S1_iiiii _next
+_symbol _Z16MatrixMulKnl_233PK6dvuintS1_S1_iiiii _next
+
+_symbol _Z18ComputeResidualKnlPK6dvuintS1_S1_S1_fii _next
+
+/* Reduced-system solve: once per LM iteration, outside the per-tile loop. */
+_symbol _Z13ComputeUpdatei _next
+_symbol _Z16AccumulateMatKnlPfS_iiii _next
+_symbol _Z17Convert2MatrixKnlPfS_iiiii _next
+_symbol _Z18Convert2MatrixBKnlPfS_iii _next
+_symbol _Z24CholeskyDecompositionKnlPfS_ii _next
+_symbol _Z22ForwardSubstitutionKnlPfS_S_ii _next
+_symbol _Z23BackwardSubstitutionKnlPfS_S_ii _next
+
+/* Update application: once per LM iteration. */
+_symbol _Z11ApplyUpdatei _next
+/* Per-tile DMA helper for ApplyUpdate (default layout strands it past the cost kernels). */
+_symbol _Z25issueApplyUpdateTileLoadsiii _next
+_symbol _Z19ApplyPointUpdateKnlPK6dvuintS1_S1_S1_i _next
+_symbol _Z17SetHomogeneousKnlPK6dvuinti _next
+_symbol _Z14Convert2SE3KnlPfS_ii _next
+_symbol _Z11CopyDataKnlPfS_i _next
+_symbol _Z14UpdatePosesKnlPfS_S_ii _next
+
+/* Cost evaluation (ApplyUpdate and ComputeInitialCost()). */
+_symbol _Z21FindObservedTracksKnlPK6dvuintS1_ii _next
+_symbol _Z17FilterResidualKnlPK6dvuintS1_S1_i _next
+_symbol _Z14ComputeCostKnlPfPK6dvuintfS_i _next

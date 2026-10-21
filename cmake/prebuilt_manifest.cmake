@@ -1,0 +1,47 @@
+#
+# SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# Generated for release v0.6.0. Do not edit.
+#
+set(PVA_PREBUILT_TAG "v0.6.0" CACHE INTERNAL "Pinned prebuilt release tag")
+set(PVA_PREBUILT_BASE_URL "https://edge.urm.nvidia.com/artifactory/sw-pva-generic-local/pva-solutions" CACHE INTERNAL "Base URL for prebuilt artifacts")
+set(PVA_PREBUILT_SHA256_assets "1996eec03080041adc50181dac8d3bee389e581f6f8e5c7b27ced5ea461d653a")
+set(PVA_PREBUILT_SHA256_device_binaries_2005 "a7c82fb07415226f00062519e54b9e442571d727135898614b66f8d2a316c567")
+set(PVA_PREBUILT_SHA256_device_binaries_2006 "35e10d0ea40773b5bcaf7f18e6aaa6dffc41211b0bba59d54c3c3c6c42c2399b")
+set(PVA_PREBUILT_SHA256_device_binaries_2007 "2d795cf797e0e5d198bda864cfd47ab8509be5636c84f697403fcecd044a0627")
+set(PVA_PREBUILT_SHA256_device_binaries_2008 "162f7b9c0d8daec9fd4df4c0a3625247eab58a1219bd2c53fb9229a5b882a918")
+set(PVA_PREBUILT_SHA256_device_binaries_2009 "e860a136d929c60f0ed996b55f02d9e1265ee238c7f0550f0925e4169e6f1b7d")
+set(PVA_PREBUILT_SHA256_device_binaries_2010 "d7756abfc255001416600d2c40dc78b786e89e6a5605ab9750dc91528205663e")
+set(PVA_PREBUILT_SHA256_onnx_compiler_x86_64-linux-gnu "6ff6bd6d8ea3b975314436a78277c1d6af3e8a9802235d8c6f187d137b96a0fd")
+set(PVA_PREBUILT_SHA256_pva_dl_lib_2005_aarch64-linux-gnu "84a21f0b87d59d077993a834aac8832d367c9227a798b77cc893b2956512d307")
+set(PVA_PREBUILT_SHA256_pva_dl_lib_2005_aarch64-qnx710 "43c81621f4e6b689c3d92097603198f5e138a765eb3f26cf3dd776dacf204314")
+set(PVA_PREBUILT_SHA256_pva_dl_lib_2005_x86_64-linux-gnu "9d0bd06e81591e54c4a29ff92c56db78e393c9b951bec83784448641fa9707c6")
+set(PVA_PREBUILT_SHA256_pva_dl_lib_2006_aarch64-linux-gnu "d463c77dd85ac116ee39960aba1ab603e4fddaa50fca6bc99b0435b30966df13")
+set(PVA_PREBUILT_SHA256_pva_dl_lib_2006_aarch64-qnx800 "72a1ad39ccc6f34944d4056e9f5a72ba0e9cccb412a657c9b4694b72b08357f5")
+set(PVA_PREBUILT_SHA256_pva_dl_lib_2006_x86_64-linux-gnu "37a36271a8ddecce309620c627ca4f24425929e4fab1d744686fbfda456adb11")
+set(PVA_PREBUILT_SHA256_pva_dl_lib_2007_aarch64-linux-gnu "f34e18526752b04e285a5d5a840c82c079616f1c02a8372d00c7da7eeaedf5ba")
+set(PVA_PREBUILT_SHA256_pva_dl_lib_2007_aarch64-qnx800 "f4dc487eb2eb91762ed0f87a40cb7caf581dac4b10d29b25dfaa942cc417329a")
+set(PVA_PREBUILT_SHA256_pva_dl_lib_2007_x86_64-linux-gnu "c17f2872b33a63ddc14e2feabc49365e58dd3dce59384b7e4e00103aec675a5b")
+set(PVA_PREBUILT_SHA256_pva_dl_lib_2008_aarch64-linux-gnu "49f5ccaf3c5573a76145ddf2d3c810ddf0b7376df92d0eb247a87c0cdf236c59")
+set(PVA_PREBUILT_SHA256_pva_dl_lib_2008_aarch64-qnx800 "7df50efd161dc7243f841d9e43deaaedd0072b1ade4a000a38230eb11e699fb1")
+set(PVA_PREBUILT_SHA256_pva_dl_lib_2008_x86_64-linux-gnu "0e38796a957d235ee9e23770814181929e81653d8370e603f6c86413387545c1")
+set(PVA_PREBUILT_SHA256_pva_dl_lib_2009_aarch64-linux-gnu "228577a6b1343ff66991d04daf5947ca4c94d433330f38089c9a6e19ddf311a0")
+set(PVA_PREBUILT_SHA256_pva_dl_lib_2009_aarch64-qnx800 "5144080448f8696f4a793eea44159402658ba898136275b4760e1b00f596ac98")
+set(PVA_PREBUILT_SHA256_pva_dl_lib_2009_x86_64-linux-gnu "b803b6c1d469ad48967eb6a541dd4524fa6a9baab86ea22015f757154b1eb652")
+set(PVA_PREBUILT_SHA256_pva_dl_lib_2010_aarch64-linux-gnu "6324e12c01de725772ebf95b3ecacbed232e23fe01dabc2cc64bfca2fc147662")
+set(PVA_PREBUILT_SHA256_pva_dl_lib_2010_aarch64-qnx800 "12c7e2d9696b24f33ad8c467a907b50bf084e4aabc3250ff1142f6e7a63823b7")
+set(PVA_PREBUILT_SHA256_pva_dl_lib_2010_x86_64-linux-gnu-emu "98da30b0d9d2ae61da6840370b231bde186b90a00ef71dc2e068ebfdf858329a")
+set(PVA_PREBUILT_SHA256_pva_dl_lib_2010_x86_64-linux-gnu "5d6cd378325b7a9b1b3b43b848b297232f831c25341ae2894b65609a066f466c")

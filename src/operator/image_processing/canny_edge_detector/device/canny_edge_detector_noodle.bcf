@@ -1,0 +1,45 @@
+/*
+ * SPDX-FileCopyrightText: Copyright (c) 2025-2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+#include <cupva_vpu.bcf>
+
+_symbol void_cupvaRasterDataFlowOpen_RUnifiedRDFHandler___Pvoid _next
+_symbol __uint__cupvaRasterDataFlowAdvProgImpl_RRasterDataFlowHandler _next
+_symbol void_cupvaICachePrefetch___uint___uint _next
+_symbol void_canny_edge_detector_stage1_init___P__uchar___P__sint___P__schar___PStage1BufPtrs___PFlt4x2Para___PFlt4Para___PEdgePara___sint___sint___sint___sint___uint _next
+_symbol void_reformat_coef___P__schar___P__schar___P__schar___sint _next
+_symbol void_filter4x2_hor_short_init___P__uchar___P__schar___P__sshort___P__sshort___sint___sint___sint___sint___sint___sint___sint___uint___PFlt4x2Para _next
+_symbol void_filter4_ver_short_init___P__sshort___P__schar___P__sshort___sint___sint___sint___sint___sint___sint___PFlt4Para _next
+_symbol void_calc_intensity_L2_init___P__sshort___P__sshort___P__sint___sint___sint___sint___sint___PEdgePara _next
+_symbol void_edge_direction_init___P__sshort___P__sshort___P__schar___sint___sint___sint___sint___PEdgePara _next
+_symbol __sint_canny_edge_detector_stage1_exec___PFlt4x2Para___PFlt4Para___PEdgePara _next
+_symbol __sint_filter4x2_hor_short_exec___PFlt4x2Para _next
+_symbol __sint_filter4_ver_short_exec___PFlt4Para _next
+_symbol __sint_calc_intensity_L2_exec___PEdgePara _next
+_symbol __sint_edge_direction_exec___PEdgePara _next
+_symbol void_nms_double_thresholding_init___P__schar___P__sint___P__uchar___sint___sint___sint___sint___sint___uint___PEdgePara _next
+_symbol __sint_nms_double_thresholding_exec___PEdgePara___sint___sint _next
+_symbol __sint_canny_edge_detector_ccl_exec___PStage3BufPtrs___sint___sint _next
+_symbol void_init_reformat___Pparam_reformat___uint___Pvoid___uint___Pvoid _next
+_symbol void_init_label___Pparam_label___Pvoid___uint___P__ushort___P__ushort _next
+_symbol void_exec_reformat___Pparam_reformat___Pvoid_bool _next
+_symbol __sint_exec_label___Pparam_label___P__ushort___P__ushort___Pvoid___uint_bool _next
+_symbol void_exec_tree_collapse___P__ushort___P__ushort___Pparam_label _next
+_symbol void_init_relabel_reformat___Pparam_relabel_reformat___uint___Pvoid___uint___Pvoid _next
+_symbol void_init_edge_map___Pparam_relabel_reformat___P__ushort___uint _next
+_symbol void_init_relabel_sampler___PCupvaSampler___P__ushort___P__ushort___P__ushort _next
+_symbol void_exec_relabel_reformat___Pparam_relabel_reformat___Pvoid _next
+_symbol void_exec_edge_map___Pparam_relabel_reformat___Pvoid _next

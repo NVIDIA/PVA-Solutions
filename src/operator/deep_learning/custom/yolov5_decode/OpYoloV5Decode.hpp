@@ -1,0 +1,88 @@
+/*
+ * SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+#pragma once
+
+#include <IOperator.hpp>
+#include <cupva_host.hpp>
+#include <nvcv/Tensor.hpp>
+
+#include <OpYoloV5Decode.h>
+#include <cupva_host_scheduling.h>
+#include <nvcv/Tensor.h>
+
+#include <map>
+#include <memory>
+#include <mutex>
+#include <tuple>
+
+namespace pva_solutions::priv {
+
+class YoloV5Decode final : public IOperator
+{
+public:
+    using ExecKey = std::tuple<cupva::impl::Context *>;
+
+    YoloV5Decode(const NVCVTensorRequirements *inPredReqs, const NVCVTensorRequirements *inAnchorReqs,
+                 const NVCVTensorRequirements *outBoxesReqs, const NVCVTensorRequirements *outScoresReqs,
+                 const NVCVTensorRequirements *outClassesReqs, const NVCVTensorRequirements *outCountReqs,
+                 int numClasses, float confThreshold, int imgHeight, int imgWidth,
+                 PVAYoloV5DecodeInputLayout inputLayout);
+
+    template<typename StreamType>
+    void operator()(StreamType stream, const nvcv::Tensor &predictions, const nvcv::Tensor &anchors,
+                    const nvcv::Tensor &boxes, const nvcv::Tensor &scores, const nvcv::Tensor &classes,
+                    const nvcv::Tensor &count);
+
+    ~YoloV5Decode();
+
+private:
+    static std::shared_ptr<cupva::Executable> GetExec();
+    static std::mutex s_execMapMutex;
+    static std::map<ExecKey, std::weak_ptr<cupva::Executable>> s_executables;
+
+    bool m_hwcInput;
+    int m_predHW;
+    int m_numAnchors;
+    int m_numClasses;
+    int m_maxOutputBoxes;
+    float m_confThreshold;
+    int m_imgHeight;
+    int m_imgWidth;
+
+    NVCVTensorRequirements m_inPredTensorRequirements;
+    NVCVTensorRequirements m_inAnchorTensorRequirements;
+    NVCVTensorRequirements m_outBoxesTensorRequirements;
+    NVCVTensorRequirements m_outScoresTensorRequirements;
+    NVCVTensorRequirements m_outClassesTensorRequirements;
+    NVCVTensorRequirements m_outCountTensorRequirements;
+
+    std::shared_ptr<cupva::Executable> m_exec;
+    cupva::OffsetPointer<float> m_inputOp;
+    cupva::OffsetPointer<float> m_anchorOp;
+    cupva::OffsetPointer<float> m_boxesOp;
+    cupva::OffsetPointer<int16_t> m_scoresOp;
+    cupva::OffsetPointer<int16_t> m_classesOp;
+    cupva::OffsetPointer<int> m_countOp;
+    cupvaCmd_t m_prog;
+
+    cupvaParameter_t m_outputPtrParam;
+    cupvaParameter_t m_outputConfPtrParam;
+    cupvaParameter_t m_outputClsPtrParam;
+};
+
+} // namespace pva_solutions::priv

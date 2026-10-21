@@ -1,0 +1,6 @@
+https://github.com/onnx/models/raw/bec48b6a70e5e9042c0badbaafefe4454e072d08/Computer_Vision/swin_t_Opset18_torch_hub/swin_t_Opset18.onnx?download= swin_t_Opset18.onnx
+https://huggingface.co/Kalray/yolov5s/resolve/e71ec5cccc4d3335bf6ddb7a2ef320c8ef8f123e/yolov5s.optimized.onnx yolov5s.optimized.onnx
+https://github.com/NVIDIA-AI-IOT/cuDLA-samples/raw/dffbd62399cb1d18ea705720202521ab60ac9c7e/data/model/yolov5s_trimmed_reshape_tranpose.onnx?download= yolov5s_trimmed_reshape_tranpose.onnx
+https://github.com/onnx/models/raw/b1eeaa1ac722dcc1cd1a8284bde34393dab61c3d/Computer_Vision/resnet50_Opset18_timm/resnet50_Opset18.onnx?download= resnet50_Opset18.onnx
+https://huggingface.co/onnxmodelzoo/convnext_tiny_Opset18_timm/resolve/9de7c7d31e7778b1f567f01cb1cc32c38c81fd79/convnext_tiny_Opset18_timm.onnx convnext_tiny_Opset18_timm.onnx
+https://huggingface.co/prithivMLmods/YOLO26-ONNX/resolve/c526dae7a5a5b4f1d79d704903b4406011da2716/yolo26s/yolo26s.onnx yolo26s.onnx

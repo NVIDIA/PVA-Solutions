@@ -1,0 +1,47 @@
+/*
+ * SPDX-FileCopyrightText: Copyright (c) 2025-2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+#include <cupva_vpu.bcf>
+
+_symbol _Z23cupvaRasterDataFlowOpenR17UnifiedRDFHandlerPv _next
+_symbol @PVA_RDF_ADVPROG_SYMBOL@ _next
+_symbol _Z19cupvaICachePrefetchjj _next
+
+_symbol _Z31canny_edge_detector_stage1_initPKhPiPaP13Stage1BufPtrsP10Flt4x2ParaP8Flt4ParaP8EdgeParaiiiij _next
+_symbol _Z13reformat_coefPaPKaS1_i _next
+_symbol _Z24filter4x2_hor_short_initPKhPKaPsS3_iiiiiiijP10Flt4x2Para _next
+_symbol _Z22filter4_ver_short_initPKsPKaPsiiiiiiP8Flt4Para _next
+_symbol _Z22calc_intensity_L2_initPKsS0_PiiiiiP8EdgePara _next
+_symbol _Z19edge_direction_initPKsS0_PaiiiiP8EdgePara _next
+_symbol _Z31canny_edge_detector_stage1_execP10Flt4x2ParaP8Flt4ParaP8EdgePara _next
+_symbol _Z24filter4x2_hor_short_execP10Flt4x2Para _next
+_symbol _Z22filter4_ver_short_execP8Flt4Para _next
+_symbol _Z22calc_intensity_L2_execP8EdgePara _next
+_symbol _Z19edge_direction_execP8EdgePara _next
+_symbol _Z28nms_double_thresholding_initPKaPKiPhiiiiijP8EdgePara _next
+_symbol _Z28nms_double_thresholding_execP8EdgeParaii _next
+
+_symbol _Z28canny_edge_detector_ccl_execP13Stage3BufPtrsii _next
+_symbol _Z13init_reformatP14param_reformatjPvjS1_ _next
+_symbol _Z10init_labelP11param_labelPvjPtS2_ _next
+_symbol _Z13exec_reformatP14param_reformatPvb _next
+_symbol _Z10exec_labelP11param_labelPtS1_Pvjb _next
+_symbol _Z18exec_tree_collapsePtS_P11param_label _next
+_symbol _Z21init_relabel_reformatP22param_relabel_reformatjPvjS1_ _next
+_symbol _Z13init_edge_mapP22param_relabel_reformatPtj _next
+_symbol _Z20init_relabel_samplerP12CupvaSamplerPtS1_S1_ _next
+_symbol _Z21exec_relabel_reformatP22param_relabel_reformatPv _next
+_symbol _Z13exec_edge_mapP22param_relabel_reformatPv _next
